@@ -3,10 +3,14 @@ const app=express()
 app.use(express.json())
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 let persons=[
 =======
 const persons=[
 >>>>>>> 2b6df33... 3.1: Phonebook backend step1
+=======
+let persons=[
+>>>>>>> a2cc306... 3.4: Phonebook backend step4
     {
         name:"Arto Hellas",
         number:"040-123456",
@@ -14,10 +18,14 @@ const persons=[
     },
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         name:"Ada-Lovelace",
 =======
         name:"Ada :Lovelace",
 >>>>>>> 2b6df33... 3.1: Phonebook backend step1
+=======
+        name:"Ada-Lovelace",
+>>>>>>> a2cc306... 3.4: Phonebook backend step4
         number:39-44-53253523,
         id:2,
     },
@@ -63,11 +71,15 @@ app.get('/api/persons/:id',(req,res)=>{
     }
 })
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a2cc306... 3.4: Phonebook backend step4
 app.delete('/api/persons/:id',(req,res)=>{
     const id=Number(req.params.id)
     persons=persons.filter(p=>p.id!==id)
     res.status(204).end()
 })
+<<<<<<< HEAD
 const generateId=(min,max)=>{
     return Math.floor(Math.random()*(max-min)) + min
 }
@@ -105,6 +117,8 @@ app.post('/api/persons',(req,res)=>{
 >>>>>>> 4dcf38b... 3.2:Phonebook backend step2
 =======
 >>>>>>> 7c7fdb8... 3.3: Phonebook backend step3
+=======
+>>>>>>> a2cc306... 3.4: Phonebook backend step4
 const PORT=3000
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
