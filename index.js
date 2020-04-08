@@ -2,14 +2,22 @@ const express=require('express')
 const app=express()
 app.use(express.json())
 
+<<<<<<< HEAD
 let persons=[
+=======
+const persons=[
+>>>>>>> 2b6df33... 3.1: Phonebook backend step1
     {
         name:"Arto Hellas",
         number:"040-123456",
         id:1
     },
     {
+<<<<<<< HEAD
         name:"Ada-Lovelace",
+=======
+        name:"Ada :Lovelace",
+>>>>>>> 2b6df33... 3.1: Phonebook backend step1
         number:39-44-53253523,
         id:2,
     },
@@ -31,6 +39,7 @@ app.get('/',(req,res)=>{
 app.get('/api/persons',(req,res)=>{
     res.json(persons)
 })
+<<<<<<< HEAD
 app.get('/info',(req,res)=>{
     res.send(`
         <p>Phonebook has info for ${persons.length} ${persons.length===1 ? 'person' : 'people'}</p>
@@ -82,6 +91,8 @@ app.post('/api/persons',(req,res)=>{
     res.json(newPerson)
 
 })
+=======
+>>>>>>> 2b6df33... 3.1: Phonebook backend step1
 const PORT=3000
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
