@@ -40,12 +40,16 @@ app.get('/api/persons',(req,res)=>{
     res.json(persons)
 })
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4dcf38b... 3.2:Phonebook backend step2
 app.get('/info',(req,res)=>{
     res.send(`
         <p>Phonebook has info for ${persons.length} ${persons.length===1 ? 'person' : 'people'}</p>
         <p>${new Date()}
     `)
 })
+<<<<<<< HEAD
 app.get('/api/persons/:id',(req,res)=>{
     const id=Number(req.params.id)
     const person=persons.find(person=>person.id===id)
@@ -93,6 +97,8 @@ app.post('/api/persons',(req,res)=>{
 })
 =======
 >>>>>>> 2b6df33... 3.1: Phonebook backend step1
+=======
+>>>>>>> 4dcf38b... 3.2:Phonebook backend step2
 const PORT=3000
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
