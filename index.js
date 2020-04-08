@@ -50,6 +50,9 @@ app.get('/info',(req,res)=>{
     `)
 })
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7c7fdb8... 3.3: Phonebook backend step3
 app.get('/api/persons/:id',(req,res)=>{
     const id=Number(req.params.id)
     const person=persons.find(person=>person.id===id)
@@ -59,6 +62,7 @@ app.get('/api/persons/:id',(req,res)=>{
         res.status(404).end()
     }
 })
+<<<<<<< HEAD
 app.delete('/api/persons/:id',(req,res)=>{
     const id=Number(req.params.id)
     persons=persons.filter(p=>p.id!==id)
@@ -99,6 +103,8 @@ app.post('/api/persons',(req,res)=>{
 >>>>>>> 2b6df33... 3.1: Phonebook backend step1
 =======
 >>>>>>> 4dcf38b... 3.2:Phonebook backend step2
+=======
+>>>>>>> 7c7fdb8... 3.3: Phonebook backend step3
 const PORT=3000
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
