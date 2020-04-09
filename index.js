@@ -55,19 +55,28 @@ const generateId=(min,max)=>{
     return Math.floor(Math.random()*(max-min)) + min
 }
 app.post('/api/persons',(req,res)=>{
-    const nameBody=req.body.name
-    const numberBody=req.body.number
-    if(!nameBody && !numberBody){
+    const body=req.body
+    if(!body.name){
         return res.status(400).json({
-            error:'Required Property Is Missing'
+            error:'Required Name Property Is Missing'
+        })
+    }
+    if(!body.number){
+        return res.status(400).json({
+            error:'Required Number Property Is Missing'
+        })
+    }
+    if(persons.find(person=>person.name.toLowerCase()===body.name.toLowerCase())){
+        return res.status(400).json({
+            error:'name must be unique'
         })
     }
     const min=persons.length
     const max=10000
     const newPerson={
         id:generateId(min,max),
-        name:nameBody,
-        number:numberBody
+        name:body.name,
+        number:body.number
     }
     persons=persons.concat(newPerson)
     res.json(newPerson)
