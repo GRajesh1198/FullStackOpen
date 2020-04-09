@@ -88,6 +88,7 @@ const generateId=(min,max)=>{
 }
 app.post('/api/persons',(req,res)=>{
 <<<<<<< HEAD
+<<<<<<< HEAD
     const body=req.body
     if(!body.name){
         return res.status(400).json({
@@ -109,6 +110,22 @@ app.post('/api/persons',(req,res)=>{
         return res.status(400).json({
             error:'Required Property Is Missing'
 >>>>>>> b0ba936... 3.5: Phonebook backend step5
+=======
+    const body=req.body
+    if(!body.name){
+        return res.status(400).json({
+            error:'Required Name Property Is Missing'
+        })
+    }
+    if(!body.number){
+        return res.status(400).json({
+            error:'Required Number Property Is Missing'
+        })
+    }
+    if(persons.find(person=>person.name.toLowerCase()===body.name.toLowerCase())){
+        return res.status(400).json({
+            error:'name must be unique'
+>>>>>>> d398cf1... 3.6:Phonebook backend step6
         })
     }
     const min=persons.length
@@ -116,12 +133,17 @@ app.post('/api/persons',(req,res)=>{
     const newPerson={
         id:generateId(min,max),
 <<<<<<< HEAD
+<<<<<<< HEAD
         name:body.name,
         number:body.number
 =======
         name:nameBody,
         number:numberBody
 >>>>>>> b0ba936... 3.5: Phonebook backend step5
+=======
+        name:body.name,
+        number:body.number
+>>>>>>> d398cf1... 3.6:Phonebook backend step6
     }
     persons=persons.concat(newPerson)
     res.json(newPerson)
