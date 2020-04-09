@@ -80,10 +80,14 @@ app.delete('/api/persons/:id',(req,res)=>{
     res.status(204).end()
 })
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b0ba936... 3.5: Phonebook backend step5
 const generateId=(min,max)=>{
     return Math.floor(Math.random()*(max-min)) + min
 }
 app.post('/api/persons',(req,res)=>{
+<<<<<<< HEAD
     const body=req.body
     if(!body.name){
         return res.status(400).json({
@@ -98,19 +102,32 @@ app.post('/api/persons',(req,res)=>{
     if(persons.find(person=>person.name.toLowerCase()===body.name.toLowerCase())){
         return res.status(400).json({
             error:'name must be unique'
+=======
+    const nameBody=req.body.name
+    const numberBody=req.body.number
+    if(!nameBody && !numberBody){
+        return res.status(400).json({
+            error:'Required Property Is Missing'
+>>>>>>> b0ba936... 3.5: Phonebook backend step5
         })
     }
     const min=persons.length
     const max=10000
     const newPerson={
         id:generateId(min,max),
+<<<<<<< HEAD
         name:body.name,
         number:body.number
+=======
+        name:nameBody,
+        number:numberBody
+>>>>>>> b0ba936... 3.5: Phonebook backend step5
     }
     persons=persons.concat(newPerson)
     res.json(newPerson)
 
 })
+<<<<<<< HEAD
 =======
 >>>>>>> 2b6df33... 3.1: Phonebook backend step1
 =======
@@ -119,6 +136,8 @@ app.post('/api/persons',(req,res)=>{
 >>>>>>> 7c7fdb8... 3.3: Phonebook backend step3
 =======
 >>>>>>> a2cc306... 3.4: Phonebook backend step4
+=======
+>>>>>>> b0ba936... 3.5: Phonebook backend step5
 const PORT=3000
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
