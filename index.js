@@ -51,6 +51,28 @@ app.delete('/api/persons/:id',(req,res)=>{
     persons=persons.filter(p=>p.id!==id)
     res.status(204).end()
 })
+const generateId=(min,max)=>{
+    return Math.floor(Math.random()*(max-min)) + min
+}
+app.post('/api/persons',(req,res)=>{
+    const nameBody=req.body.name
+    const numberBody=req.body.number
+    if(!nameBody && !numberBody){
+        return res.status(400).json({
+            error:'Required Property Is Missing'
+        })
+    }
+    const min=persons.length
+    const max=10000
+    const newPerson={
+        id:generateId(min,max),
+        name:nameBody,
+        number:numberBody
+    }
+    persons=persons.concat(newPerson)
+    res.json(newPerson)
+
+})
 const PORT=3000
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
