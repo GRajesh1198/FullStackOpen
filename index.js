@@ -20,17 +20,17 @@ let persons=[
     },
     {
         name:"Ada-Lovelace",
-        number:39-44-53253523,
+        number:"39-44-53253523",
         id:2,
     },
     {
         name:"Dan Aberav",
-        number:021-6345673,
+        number:"021-6345673",
         id:3,
     },
     {
         name:"Mary Poppendick",
-        number:91-628183440,
+        number:"91-628183440",
         id:4
     }
     
