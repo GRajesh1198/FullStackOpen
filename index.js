@@ -88,18 +88,16 @@ app.post('/api/persons',(req,res)=>{
             error:'name must be unique'
         })
     }
-    const min=persons.length
-    const max=10000
-    const newPerson={
-        id:generateId(min,max),
+    const person=new Person({
         name:body.name,
         number:body.number
-    }
-    persons=persons.concat(newPerson)
-    res.json(newPerson)
+    })
+    person.save().then(savedNote=>{
+        res.json(savedNote.toJSON())
+    })
 
 })
-const PORT=process.env.PORT || 3001
+const PORT=process.env.PORT 
 app.listen(PORT,()=>{
     console.log(`Server running on  port ${3001}`)
 })
