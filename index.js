@@ -1,8 +1,12 @@
+require('dotenv').config()
 const express=require('express')
+
 const app=express()
 const cors=require('cors')
+const Person=require('./models/person')
 app.use(cors())
 app.use(express.json())
+app.use(express.static('build'))
 var morgan=require('morgan')
 morgan.token('content',(req,res)=>{
     if(req.method!=='POST'){
@@ -39,7 +43,10 @@ app.get('/',(req,res)=>{
     res.send("Go to Route /api/persons to access the data")
 })
 app.get('/api/persons',(req,res)=>{
-    res.json(persons)
+    Person.find({}).then(result=>{
+        console.log("Results Obtained")
+        res.json(result.map(person=>person.toJSON()))
+    })
 })
 app.get('/info',(req,res)=>{
     res.send(`
