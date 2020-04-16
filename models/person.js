@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+mongoose.set('useFindAndModify',false)
 
 const url=process.env.MONGODB_URL
 console.log("connecting to ",url)
@@ -7,7 +8,7 @@ mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology:true})
             console.log("connected to mongoDB")
         })
         .catch(error=>{
-            console.log("error connecting to ",error.message)
+            console.log("error connecting ",error.message)
         })
 const personSchema=new mongoose.Schema({
     name:String,
