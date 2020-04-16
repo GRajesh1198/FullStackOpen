@@ -20,37 +20,42 @@ app.get('/',(req,res)=>{
     res.send("Go to Route /api/persons to access the data")
 })
 
-app.get('/info',(req,res)=>{
+app.get('/info',(req,res,next)=>{
     res.send(`
         <p>Phonebook has info for ${persons.length} ${persons.length===1 ? 'person' : 'people'}</p>
         <p>${new Date()}
     `)
 })
-app.get('/api/persons',(req,res)=>{
-    Person.find({}).then(result=>{
-        console.log("Results Obtained")
-        res.json(result.map(person=>person.toJSON()))
-    })
+app.get('/api/persons',(req,res,next)=>{
+    Person.find({})
+        .then(result=>{
+            console.log("Results Obtained")
+            res.json(result.map(person=>person.toJSON()))
+        })
+        .catch(error=>next(error))
 })
 
-app.get('/api/persons/:id',(req,res)=>{
-    const id=Number(req.params.id)
-    const person=persons.find(person=>person.id===id)
-    if(person){
-        res.json(person)
-    }else{
-        res.status(404).end()
-    }
+app.get('/api/persons/:id',(req,res,next)=>{
+    Person.findById(req.params.id)
+          .then(person=>{
+              if(person){
+                  res.json(person.toJSON())
+              }else{
+                  res.status(404).end()
+              }
+          })
+          .catch(error=>next(error))
 })
 
-app.delete('/api/persons/:id',(req,res)=>{
+app.delete('/api/persons/:id',(req,res,next)=>{
     Person.findByIdAndRemove(req.params.id)
           .then(note=>{
               res.status(204).end()
           })
+          .catch(error=>next(error))
 })
 
-app.post('/api/persons',(req,res)=>{
+app.post('/api/persons',(req,res,next)=>{
     const body=req.body
     if(!body.name){
         return res.status(400).json({
@@ -62,18 +67,16 @@ app.post('/api/persons',(req,res)=>{
             error:'Required Number Property Is Missing'
         })
     }
-    if(persons.find(person=>person.name.toLowerCase()===body.name.toLowerCase())){
-        return res.status(400).json({
-            error:'name must be unique'
-        })
-    }
+    
     const person=new Person({
         name:body.name,
         number:body.number
     })
-    person.save().then(savedNote=>{
-        res.json(savedNote.toJSON())
-    })
+    person.save()
+        .then(savedNote=>{
+            res.json(savedNote.toJSON())
+        })
+        .catch(error=>next(error))
 
 })
 
@@ -82,6 +85,18 @@ const unknownEndpoint=(req,res)=>{
 }
 
 app.use(unknownEndpoint)
+
+const errorHandler=(error,req,res,next)=>{
+    console.log(error.message)
+
+    if(error.name==='CastError' && error.kind==='ObjectId'){
+        return res.status(400).send({
+            error:'Malformatted Id'
+        })
+    }
+    next(error)
+}
+app.use(errorHandler)
 const PORT=process.env.PORT 
 app.listen(PORT,()=>{
     console.log(`Server running on  port ${3001}`)
