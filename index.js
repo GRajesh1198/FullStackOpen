@@ -21,10 +21,13 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/info',(req,res,next)=>{
-    res.send(`
-        <p>Phonebook has info for ${persons.length} ${persons.length===1 ? 'person' : 'people'}</p>
-        <p>${new Date()}
-    `)
+    Person.countDocuments()
+          .then(count=>{
+              res.send( `<p>Phonebook has info for ${count} ${count==1 ? "Person" :"People"}</p>
+              <p>${new Date()}`
+            )
+
+          })
 })
 app.get('/api/persons',(req,res,next)=>{
     Person.find({})
